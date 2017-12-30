@@ -337,13 +337,11 @@ public class FocusOverlayManager {
     public void onAutoFocusMoving(boolean moving) {
         if (!mInitialized) return;
 
-        if (mPreviousMoving == moving) return;
-
         // animate on false->true trasition only b/8219520
-        if (moving) {
+        if (moving && !mPreviousMoving) {
             mIsAFRunning = true;
             mFocusRing.startPassiveFocus();
-        } else {
+        } else if (!moving) {
             mFocusRing.stopFocusAnimations();
             mIsAFRunning = false;
             if (mState == STATE_FOCUSING_SNAP_ON_FINISH) {
@@ -482,9 +480,6 @@ public class FocusOverlayManager {
         if (mListener.capture()) {
             mState = STATE_IDLE;
             mHandler.removeMessages(RESET_TOUCH_FOCUS);
-            if (mIsAFRunning) {
-                onAutoFocusMoving(false);
-            }
         }
     }
 
