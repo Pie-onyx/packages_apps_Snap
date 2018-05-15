@@ -30,6 +30,7 @@ LOCAL_PACKAGE_NAME := Snap
 LOCAL_AAPT_FLAGS += --rename-manifest-package org.cyanogenmod.snap
 
 #LOCAL_SDK_VERSION := current
+LOCAL_PRIVATE_PLATFORM_APIS := true
 
 LOCAL_OVERRIDES_PACKAGES := Camera2
 
